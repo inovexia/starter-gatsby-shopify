@@ -1,91 +1,107 @@
-import React, { useState, useEffect } from 'react'
-import Seo from '../components/seo'
-import { graphql } from 'gatsby'
+import React, { Component } from 'react'
 import Layout from '../layouts'
-import ProductBox from '../components/ProductList/productBox'
+import SEO from '../components/seo'
+import { graphql } from 'gatsby'
+import ProductBox from '../components/productBox'
+import PropTypes from 'prop-types'
 
-const SearchPage = ({ data }) => {
-  const [search, setSearch] = useState('')
+export class SearchPage extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      document: '',
+    }
+  }
+  componentDidMount() {
+    this.setState({
+      document: document.location.search
+        .substring(7)
+        .replace(/\+/g, ' ')
+        .split('=')[0],
+    })
+  }
 
-  useEffect(() => {
-    setSearch(
-      typeof document !== undefined
-        ? document.location.search.substring(7).split('=')[0]
-        : ''
-    )
-  }, [])
+  render() {
+    const { edges: products } = this.props.data.allShopifyProduct
 
-  const { edges: products } = data.allShopifyProduct
-  return (
-    <Layout>
-      <Seo title="Home" />
-      <section className="hero is-dark">
-        <div className="hero-body">
-          <div className="container">
-            <div className="field">
-              <p className="control has-icons-right">
-                <input
-                  className="input is-large"
-                  name="value"
-                  type="text"
-                  value={search}
-                  onChange={e => setSearch(e.target.value)}
-                  placeholder="Search"
-                />
-                <span className="icon is-right">
-                  <i className="fas fa-search"></i>
-                </span>
-              </p>
+    return (
+      <Layout>
+        <SEO title="Home" />
+        <section className="hero mt-5">
+          <div className="hero-body mt-5">
+            <div className="container">
+              <div className="field">
+                <p className="control has-icons-right col-12 col-md-6 mx-auto">
+                  <input
+                    className="input p-4 josefin-sans"
+                    name="value"
+                    type="text"
+                    aria-label="Search"
+                    value={this.state.document}
+                    onChange={e => this.setState({ document: e.target.value })}
+                    placeholder="Search"
+                    style={{ fontSize: '1.3rem' }}
+                  />
+                  <span
+                    className="icon is-right"
+                    style={{ top: '8px', right: '15px' }}
+                  >
+                    <i className="fa fa-search"></i>
+                  </span>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-      <section className="hero is-dark">
-        <div className="hero-body">
+        </section>
+        <section className="hero">
           <div className="hero-body">
-            <h1 className="is-size-5 has-text-medium">
-              RESULTS FOR "{search.toUpperCase()}" :
-            </h1>
-          </div>
-          <div className="container">
-            <div className="columns is-multiline ">
-              {products
-                .filter(
-                  p =>
-                    p.node.title.toUpperCase().includes(search.toUpperCase()) ||
-                    p.node.productType
-                      .toUpperCase()
-                      .includes(search.toUpperCase()) ||
-                    (p.node.title
-                      .toUpperCase()
-                      .includes(search.toUpperCase()) &&
+            <div className="hero-body">
+              <h1 className="is-size-5 has-text-medium josefin-sans-b">
+                RESULTS FOR "{this.state.document.toUpperCase()}" :
+              </h1>
+            </div>
+
+            <div className="container">
+              <div className="columns is-multiline ">
+                {products
+                  .filter(
+                    p =>
+                      p.node.title
+                        .toUpperCase()
+                        .includes(this.state.document.toUpperCase()) ||
                       p.node.productType
                         .toUpperCase()
-                        .includes(search.toUpperCase()))
-                )
-                .map((p, i) =>
-                  !p ? (
-                    <p>Nothings with : {search} </p>
-                  ) : (
-                    <div
-                      className="column is-3"
-                      style={{ marginBottom: '40px' }}
-                      key={i}
-                    >
-                      <ProductBox product={p} />
-                    </div>
+                        .includes(this.state.document.toUpperCase()) ||
+                      (p.node.title
+                        .toUpperCase()
+                        .includes(this.state.document.toUpperCase()) &&
+                        p.node.productType
+                          .toUpperCase()
+                          .includes(this.state.document.toUpperCase()))
                   )
-                )}
+                  .map((p, i) => {
+                    return !p ? (
+                      <p>Nothings with : {this.state.document} </p>
+                    ) : (
+                      <ProductBox product={p} />
+                    )
+                  })}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    </Layout>
-  )
+        </section>
+      </Layout>
+    )
+  }
 }
 
 export default SearchPage
 
+SearchPage.propTypes = {
+  data: PropTypes.shape({
+    allShopifyProduct: PropTypes.object,
+  }),
+}
 export const query = graphql`
   query {
     allShopifyProduct {
@@ -108,7 +124,9 @@ export const query = graphql`
             id
             localFile {
               childImageSharp {
-                gatsbyImageData(width: 910)
+                fluid(maxWidth: 910) {
+                  ...GatsbyImageSharpFluid_noBase64
+                }
               }
             }
           }

@@ -69,7 +69,7 @@ const CUSTOMER_INFO = gql`
 const Index = () => {
   const { customerAccessToken } = useContext(StoreContext)
   return (
-    <Layout>
+    <Layout className="my-account">
       <Query
         query={CUSTOMER_INFO}
         variables={{
@@ -82,23 +82,27 @@ const Index = () => {
           const { defaultAddress, orders, addresses } = data.customer
           return (
             <>
-              <h1 className="title has-text-centered">My Account</h1>
-              <Logout />
-              <section className="hero is-medium">
-                <div className="hero-body">
-                  <div className="container">
+              <div className="my-account-sec mt-5 pt-5">
+                <h1 className="title has-text-centered josefin-sans-b">
+                  My Account
+                </h1>
+                <Logout />
+                <section className="hero is-medium">
+                  <div className="hero-body">
                     <div className="container">
-                      <div className="columns is-centered">
-                        <OrdersList orders={orders} />
-                        <DefaultAddress
-                          defaultAddress={defaultAddress}
-                          addressesSize={addresses.edges.length}
-                        />
+                      <div className="container">
+                        <div className="columns is-centered">
+                          <OrdersList orders={orders} />
+                          <DefaultAddress
+                            defaultAddress={defaultAddress}
+                            addressesSize={addresses.edges.length}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </section>
+                </section>
+              </div>
             </>
           )
         }}

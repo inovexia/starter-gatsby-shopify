@@ -16,12 +16,14 @@ class Layout extends Component {
       return ''
     }
   }
+
   stripQuotes(a) {
     if (a !== null && a.charAt(0) === '"' && a.charAt(a.length - 1) === '"') {
       return a.substr(1, a.length - 2)
     }
     return a
   }
+
   state = {
     store: {
       ...defaultStoreContext,
@@ -133,6 +135,7 @@ class Layout extends Component {
       },
     },
   }
+
   async initializeCheckout() {
     // Check if card exits already
     const isBrowser = typeof window !== 'undefined'

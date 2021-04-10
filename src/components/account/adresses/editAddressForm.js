@@ -73,7 +73,6 @@ const EditAddressForm = ({ address }) => {
       setCountriesAll(data)
     })
   }, [])
-  console.log(checkDefaultAddress)
   return (
     <>
       <button
@@ -109,6 +108,7 @@ const EditAddressForm = ({ address }) => {
                                     className="input"
                                     value={firstNameInput}
                                     type="text"
+                                    aria-label="First Name"
                                     onChange={e =>
                                       setFirstNameInput(e.target.value)
                                     }
@@ -128,6 +128,7 @@ const EditAddressForm = ({ address }) => {
                                   <input
                                     className="input"
                                     value={lastNameInput}
+                                    aria-label="Last Name"
                                     type="text"
                                     onChange={e =>
                                       setLastNameInput(e.target.value)
@@ -146,6 +147,7 @@ const EditAddressForm = ({ address }) => {
                                 className="input"
                                 value={companyInput}
                                 type="text"
+                                aria-label="Company"
                                 onChange={e => setCompanyInput(e.target.value)}
                               />
                             </div>
@@ -157,6 +159,7 @@ const EditAddressForm = ({ address }) => {
                             <div className="control">
                               <input
                                 className="input"
+                                aria-label="Address"
                                 value={addressInput}
                                 type="text"
                                 onChange={e => setAddressInput(e.target.value)}
@@ -170,6 +173,7 @@ const EditAddressForm = ({ address }) => {
                             <div className="control">
                               <input
                                 className="input"
+                                aria-label="Apartment, suite, etc."
                                 value={apartmentInput}
                                 type="text"
                                 onChange={e =>
@@ -187,6 +191,7 @@ const EditAddressForm = ({ address }) => {
                                 <div className="control">
                                   <input
                                     className="input"
+                                    aria-label="City"
                                     value={cityInput}
                                     type="text"
                                     onChange={e => setCityInput(e.target.value)}
@@ -203,9 +208,6 @@ const EditAddressForm = ({ address }) => {
                                   <div className="select">
                                     <select
                                       value={countryInput}
-                                      onChange={e =>
-                                        setCountryInput(e.target.value)
-                                      }
                                       onBlur={e =>
                                         setCountryInput(e.target.value)
                                       }
@@ -235,6 +237,7 @@ const EditAddressForm = ({ address }) => {
                             <div className="control">
                               <input
                                 className="input"
+                                aria-label="Postal/Zip Code"
                                 value={zipInput}
                                 type="text"
                                 onChange={e => setZipInput(e.target.value)}
@@ -248,6 +251,7 @@ const EditAddressForm = ({ address }) => {
                             <div className="control">
                               <input
                                 className="input"
+                                aria-label="Phone"
                                 value={phoneInput}
                                 type="text"
                                 onChange={e => setPhoneInput(e.target.value)}
@@ -262,6 +266,7 @@ const EditAddressForm = ({ address }) => {
                               >
                                 <input
                                   type="checkbox"
+                                  aria-label="Set as default address"
                                   onChange={() =>
                                     setCheckDefaultAddress(!checkDefaultAddress)
                                   }
@@ -304,7 +309,6 @@ const EditAddressForm = ({ address }) => {
                             Update address
                           </button>
                           <button
-                            className="link-button"
                             onClick={() => setEditAdressForm(!editAdressForm)}
                           >
                             Cancel

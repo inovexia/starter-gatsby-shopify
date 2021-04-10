@@ -4,7 +4,6 @@ import Order from './order'
 const OrdersList = ({ orders }) => {
   const [selectedOrder, setSelectedOrder] = useState([])
   const [onClickOrder, setOnClickOrder] = useState(false)
-
   return (
     <>
       <div className="column has-text-centered is-9">
@@ -30,10 +29,10 @@ const OrdersList = ({ orders }) => {
                   <td>
                     <button
                       className="button is-dark"
-                      onClick={() =>
-                        setSelectedOrder(order.node) &&
+                      onClick={() => {
+                        setSelectedOrder(order.node)
                         setOnClickOrder(!onClickOrder)
-                      }
+                      }}
                     >
                       {order.node.name}
                     </button>
@@ -53,14 +52,12 @@ const OrdersList = ({ orders }) => {
         )}
       </div>
       <div className={onClickOrder ? 'modal is-active' : 'modal'}>
-        <div
-          aria-label="Background"
-          role="button"
-          tabIndex="0"
+        <button
           className="modal-background"
           onClick={() => setOnClickOrder(!onClickOrder)}
           onKeyPress={() => setOnClickOrder(!onClickOrder)}
-        ></div>
+          aria-label="onClickOrder"
+        ></button>
         <div
           className="modal-content"
           style={{ width: 'auto', padding: '10px' }}

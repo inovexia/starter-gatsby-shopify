@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 
-const SEO = ({ description, lang, meta, title }) => {
+function SEO({ description, lang, meta, title, schemaMarkup }) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -37,6 +37,15 @@ const SEO = ({ description, lang, meta, title }) => {
           content: title,
         },
         {
+          property: `og:url`,
+          content: 'https://demosoap.com/',
+        },
+        {
+          property: `og:image`,
+          content:
+            'https://demosoap.com/static/demo-d872a531fe014e9c264bb691fc5d0c7c.jpg',
+        },
+        {
           property: `og:description`,
           content: metaDescription,
         },
@@ -50,18 +59,33 @@ const SEO = ({ description, lang, meta, title }) => {
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata.author,
+          content: 'Demosoap',
+        },
+        {
+          name: `twitter:image`,
+          content:
+            'https://demosoap.com/static/demo-d872a531fe014e9c264bb691fc5d0c7c.jpg',
+        },
+        {
+          name: `twitter:site`,
+          content: 'https://demosoap.com/',
         },
         {
           name: `twitter:title`,
-          content: title,
+          content: 'Demosoap | Unique natural handmade soaps',
         },
         {
           name: `twitter:description`,
           content: metaDescription,
         },
       ].concat(meta)}
-    />
+    >
+      {schemaMarkup && (
+        <script type="application/ld+json">
+          {JSON.stringify(schemaMarkup)}
+        </script>
+      )}
+    </Helmet>
   )
 }
 
