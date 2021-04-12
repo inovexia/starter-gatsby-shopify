@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useContext, useState, useEffect } from 'react'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
@@ -36,7 +35,7 @@ const Header = ({ siteTitle }) => {
           <div className={`row`}>
             <div className={`col d-flex`}>
               <div className={`brand`}>
-                <Link to="/" className={`logo d-inline-block`}>
+                <Link to={'/'} className={`logo d-inline-block`}>
                   <GatsbyImage
                     image={topHeader.logo.childImageSharp.gatsbyImageData}
                   />
@@ -48,7 +47,7 @@ const Header = ({ siteTitle }) => {
                 </span>
                 <Form inline>
                   <FormControl
-                    type="text"
+                    type={'text'}
                     placeholder={topHeader.searchPlaceholder}
                     className={`pdt-search`}
                   />
@@ -58,7 +57,7 @@ const Header = ({ siteTitle }) => {
             <div className={`col top-right-menu`}>
               <ul className={`d-flex`}>
                 <li>
-                  <Link to="/" className={`my-account`}>
+                  <Link to={'/'} className={`my-account`}>
                     <span>
                       <GSIcon icon={topHeader.userIcon} />
                     </span>
@@ -66,7 +65,7 @@ const Header = ({ siteTitle }) => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/" className={`cart`}>
+                  <Link to={'/'} className={`cart`}>
                     <span>
                       <GSIcon icon={topHeader.cartIcon} />
                     </span>
@@ -85,20 +84,20 @@ const Header = ({ siteTitle }) => {
               <div className={`contact-via`}>
                 <ul>
                   <li>
-                    <Link to="/">
+                    <a href={`tel:${middleHeader.phoneNumber}`}>
                       <span>
                         <GSIcon icon={middleHeader.phoneIcon} />
                       </span>
                       {middleHeader.phoneNumber}
-                    </Link>
+                    </a>
                   </li>
                   <li>
-                    <Link to="/">
+                    <a href={'https://maps.google.com/'}>
                       <span>
                         <GSIcon icon={middleHeader.loactionIcon} />
                       </span>
                       {middleHeader.areaLocation}
-                    </Link>
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -114,28 +113,31 @@ const Header = ({ siteTitle }) => {
         </div>
       </div>
       <div className={'bottom-header'}>
-        <Navbar bg="light" expand="lg">
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar bg={'light'} expand={'lg'}>
+          <Navbar.Toggle aria-controls={'basic-navbar-nav'} />
+          <Navbar.Collapse id={'basic-navbar-nav'}>
             <Nav className="">
               {mainMenu &&
                 mainMenu.map(({ link, label, subMenu }, index) => {
+                  console.log(label, typeof subMenu)
                   return (
-                    <Nav.Item
-                      key={index}
-                      className="mx-3 my-0 d-inline-block py-md-3 py-lg-0"
-                    >
-                      {subMenu === 'undefined' ? (
-                        <Link to={link}>{label}</Link>
+                    <Nav.Item key={index} className={''}>
+                      {typeof subMenu === 'undefined' ? (
+                        <Link className={'nav-link'} to={link}>
+                          {label}
+                        </Link>
                       ) : (
                         <NavDropdown title={label}>
-                          {subMenu.map(({ link, label }, index) => {
-                            return (
-                              <NavDropdown.Item className={''}>
-                                <Link to={link}>{label}</Link>
-                              </NavDropdown.Item>
-                            )
-                          })}
+                          {subMenu &&
+                            subMenu.map(({ link, label }, index) => {
+                              return (
+                                <NavDropdown.Item className={''}>
+                                  <Link className={'nav-link'} to={link}>
+                                    {label}
+                                  </Link>
+                                </NavDropdown.Item>
+                              )
+                            })}
                         </NavDropdown>
                       )}
                     </Nav.Item>
