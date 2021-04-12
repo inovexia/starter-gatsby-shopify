@@ -4,7 +4,6 @@ import Layout from '../layouts'
 import SEO from '../components/seo'
 import { Link, graphql } from 'gatsby'
 import ProductList from '../components/recentProduct'
-import ChristmasDeals from '../components/christmasDeals'
 import RecentBlogs from '../components/RecentBlogs'
 
 const IndexPage = ({ data }) => {
@@ -161,9 +160,6 @@ const IndexPage = ({ data }) => {
       </section>
       <section className="py-3 py-lg-5">
         <ProductList data={data} />
-      </section>
-      <section className="py-3 py-lg-5">
-        <ChristmasDeals data={data} />
       </section>
       <section className="py-3 py-lg-5">
         <Container>

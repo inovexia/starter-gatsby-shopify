@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'GS-Starter-Icon';
+  src: url('./project/fonts/GS-Starter-Icon.eot?p1bm3m');
+  src: url('./project/fonts/GS-Starter-Icon.eot?p1bm3m#iefix')
+      format('embedded-opentype'),
+    url('./project/fonts/GS-Starter-Icon.ttf?p1bm3m') format('truetype'),
+    url('./project/fonts/GS-Starter-Icon.woff?p1bm3m') format('woff'),
+    url('./project/fonts/GS-Starter-Icon.svg?p1bm3m#GS-Starter-Icon')
+      format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.gsi {
+  font-family: 'GS-Starter-Icon';
+  speak-as: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  font-display: swap;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
