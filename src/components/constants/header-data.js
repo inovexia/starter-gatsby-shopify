@@ -3,9 +3,9 @@ import { graphql, useStaticQuery } from 'gatsby'
 const HeaderData = () => {
   const { logoImage } = useStaticQuery(graphql`
     {
-      logoImage: file(relativePath: { eq: "logo.png" }) {
+      logoImage: file(relativePath: { eq: "logo.jpg" }) {
         childImageSharp {
-          gatsbyImageData(width: 155, height: 30)
+          gatsbyImageData(width: 281, height: 75)
         }
       }
     }

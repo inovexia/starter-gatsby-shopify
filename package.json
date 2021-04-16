@@ -5,7 +5,9 @@
   "author": "Ankit Shukla <4nkit5hukla@gmail.com>",
   "scripts": {
     "build": "gatsby build",
+    "build-with-path": "gatsby clean && gatsby build --prefix-paths",
     "develop": "gatsby develop",
+    "clean-develop": "gatsby clean && gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
