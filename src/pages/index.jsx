@@ -5,6 +5,7 @@ import SEO from '../components/seo'
 import { Link, graphql } from 'gatsby'
 import ProductList from '../components/recentProduct'
 import RecentBlogs from '../components/RecentBlogs'
+import Hero from '../components/section/home/hero'
 
 const IndexPage = ({ data }) => {
   const schema = {
@@ -53,11 +54,7 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" schemaMarkup={schema} />
-      <section className="banner-section">
-        <div className="home-banner">
-          <Container></Container>
-        </div>
-      </section>
+      <Hero />
       <section className="grid-wrapper container my-5">
         <div
           className="grid-boxes a"
